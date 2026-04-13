@@ -48,4 +48,5 @@ Thumbs.db
 # Environment
 apps/console/src/environments/environment.development.ts
 apps/console/src/environments/environment.production.ts
+.env.local
 

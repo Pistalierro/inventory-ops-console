@@ -2,7 +2,12 @@
   "name": "@inventory-ops-console/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "env:dev": "node --env-file=.env.local tools/scripts/write-firebase-env.mjs development",
+    "env:prod": "node --env-file=.env.local tools/scripts/write-firebase-env.mjs production",
+    "start": "npm run env:dev && npx nx serve console",
+    "build": "npm run env:prod && npx nx build console --configuration=production"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "~20.1.0",
