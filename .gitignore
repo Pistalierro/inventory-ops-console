@@ -44,3 +44,8 @@ Thumbs.db
 .github/instructions/nx.instructions.md
 
 .angular
+
+# Environment
+apps/console/src/environments/environment.development.ts
+apps/console/src/environments/environment.production.ts
+
