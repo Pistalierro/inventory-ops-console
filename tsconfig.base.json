@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@inventory-ops-console/core-auth-data-access": [
+        "libs/core/auth/data-access/src/index.ts"
+      ],
       "@inventory-ops-console/core-user-data-access": [
         "libs/core/user/data-access/src/index.ts"
       ],
