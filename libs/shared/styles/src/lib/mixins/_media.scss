@@ -1,0 +1,79 @@
+@use '../breakpoints' as breakpoints;
+
+@mixin down($max-width) {
+  @media (max-width: $max-width - 0.02px) {
+    @content;
+  }
+}
+
+@mixin up($min-width) {
+  @media (min-width: $min-width) {
+    @content;
+  }
+}
+
+@mixin between($min-width, $max-width) {
+  @media (min-width: $min-width) and (max-width: $max-width - 0.02px) {
+    @content;
+  }
+}
+
+@mixin xs-down {
+  @include down(breakpoints.$breakpoint-xs) {
+    @content;
+  }
+}
+
+@mixin sm-down {
+  @include down(breakpoints.$breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin md-down {
+  @include down(breakpoints.$breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin lg-down {
+  @include down(breakpoints.$breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin xl-down {
+  @include down(breakpoints.$breakpoint-xl) {
+    @content;
+  }
+}
+
+@mixin xs-up {
+  @include up(breakpoints.$breakpoint-xs) {
+    @content;
+  }
+}
+
+@mixin sm-up {
+  @include up(breakpoints.$breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin md-up {
+  @include up(breakpoints.$breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin lg-up {
+  @include up(breakpoints.$breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin xl-up {
+  @include up(breakpoints.$breakpoint-xl) {
+    @content;
+  }
+}
