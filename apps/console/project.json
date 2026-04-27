@@ -26,7 +26,8 @@
           }
         ],
         "styles": [
-          "libs/shared/styles/src/styles.scss"
+          "libs/shared/styles/src/styles.scss",
+          "libs/shared/ui/src/styles.scss"
         ]
       },
       "configurations": {

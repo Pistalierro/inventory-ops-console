@@ -1,0 +1,21 @@
+<label class="ui-form-field__label">
+  <span class="ui-form-field__label-text">
+    {{ label() }}
+
+    @if (required()) {
+      <span class="ui-form-field__required" aria-hidden="true">*</span>
+    }
+  </span>
+
+  <span class="ui-form-field__control">
+    <ng-content></ng-content>
+  </span>
+</label>
+
+@if (hint()) {
+  <p class="ui-form-field__hint">{{ hint() }}</p>
+}
+
+<div class="ui-form-field__error">
+  <ng-content select="[error]"></ng-content>
+</div>

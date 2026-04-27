@@ -1,0 +1,103 @@
+:host {
+  display: inline-flex;
+}
+
+.ui-button__control {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--transition-default),
+  border-color var(--transition-default),
+  color var(--transition-default),
+  box-shadow var(--transition-default),
+  opacity var(--transition-default),
+  transform var(--transition-default);
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 4px var(--color-focus-ring);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+:host(.ui-button--primary) {
+  .ui-button__control {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-text-inverse);
+
+    &:hover:not(:disabled) {
+      background: var(--color-primary-strong);
+      border-color: var(--color-primary-strong);
+    }
+  }
+}
+
+:host(.ui-button--secondary) {
+  .ui-button__control {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+    color: var(--color-text);
+
+    &:hover:not(:disabled) {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+  }
+}
+
+:host(.ui-button--ghost) {
+  .ui-button__control {
+    background: transparent;
+    border-color: transparent;
+    color: var(--color-text-muted);
+
+    &:hover:not(:disabled) {
+      background: var(--color-surface-muted);
+      color: var(--color-text);
+    }
+  }
+}
+
+:host(.ui-button--lg) {
+  .ui-button__control {
+    min-height: 3rem;
+    padding-inline: var(--space-5);
+    font-size: var(--text-md);
+  }
+}
+
+:host(.ui-button--md) {
+  .ui-button__control {
+    min-height: 2.75rem;
+    padding-inline: var(--space-5);
+    font-size: var(--text-sm);
+  }
+}
+
+:host(.ui-button--sm) {
+  .ui-button__control {
+    min-height: 2.25rem;
+    padding-inline: var(--space-4);
+    font-size: var(--text-sm);
+  }
+}
