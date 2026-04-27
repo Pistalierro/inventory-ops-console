@@ -1,0 +1,21 @@
+{
+  "name": "core-auth-feature-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/core/auth/feature-access/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["scope:core", "type:feature"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/core/auth/feature-access/jest.config.ts",
+        "tsConfig": "libs/core/auth/feature-access/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

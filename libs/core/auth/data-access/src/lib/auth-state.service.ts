@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth, authState } from '@angular/fire/auth';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
+import { Auth, authState } from '@angular/fire/auth';
+import { map, shareReplay } from 'rxjs';
 import { mapFirebaseAuthUser } from './auth-user.mapper';
 
 @Injectable({
@@ -10,10 +10,10 @@ import { mapFirebaseAuthUser } from './auth-user.mapper';
 export class AuthStateService {
   private readonly auth = inject(Auth);
 
-  readonly authUser = toSignal(
-    authState(this.auth).pipe(
-      map((user) => (user ? mapFirebaseAuthUser(user) : null))
-    ),
-    { initialValue: null }
+  readonly authUser$ = authState(this.auth).pipe(
+    map((user) => (user ? mapFirebaseAuthUser(user) : null)),
+    shareReplay({ bufferSize: 1, refCount: true })
   );
+
+  readonly authUser = toSignal(this.authUser$, { initialValue: null });
 }

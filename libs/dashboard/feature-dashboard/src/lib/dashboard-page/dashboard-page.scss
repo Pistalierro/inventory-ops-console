@@ -1,0 +1,32 @@
+:host {
+  display: block;
+}
+
+.dashboard-page {
+  display: grid;
+  gap: var(--space-6);
+  padding: var(--space-8);
+
+  &__header {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  &__eyebrow {
+    color: var(--color-primary);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: var(--line-height-tight);
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-family: var(--font-family-heading);
+  }
+
+  &__description {
+    max-width: 40rem;
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+}

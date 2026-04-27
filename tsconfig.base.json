@@ -10,10 +10,7 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -21,31 +18,33 @@
       "@inventory-ops-console/core-auth-data-access": [
         "libs/core/auth/data-access/src/index.ts"
       ],
+      "@inventory-ops-console/core-auth-feature-access": [
+        "libs/core/auth/feature-access/src/index.ts"
+      ],
       "@inventory-ops-console/core-auth-feature-login": [
         "libs/core/auth/feature-login/src/index.ts"
+      ],
+      "@inventory-ops-console/core-shell-feature-shell": [
+        "libs/core/shell/feature-shell/src/index.ts"
       ],
       "@inventory-ops-console/core-user-data-access": [
         "libs/core/user/data-access/src/index.ts"
       ],
+      "@inventory-ops-console/dashboard-feature-dashboard": [
+        "libs/dashboard/feature-dashboard/src/index.ts"
+      ],
       "@inventory-ops-console/shared-models": [
         "libs/shared/models/src/index.ts"
       ],
-      "@inventory-ops-console/shared-ui": [
-        "libs/shared/ui/src/index.ts"
-      ],
+      "@inventory-ops-console/shared-ui": ["libs/shared/ui/src/index.ts"],
       "@inventory-ops-console/shared-ui/button": [
         "libs/shared/ui/src/button/index.ts"
       ],
       "@inventory-ops-console/shared-ui/forms": [
         "libs/shared/ui/src/forms/index.ts"
       ],
-      "@inventory-ops-console/shared-util": [
-        "libs/shared/util/src/index.ts"
-      ]
+      "@inventory-ops-console/shared-util": ["libs/shared/util/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

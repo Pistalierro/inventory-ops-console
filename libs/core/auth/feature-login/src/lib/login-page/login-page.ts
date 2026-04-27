@@ -13,6 +13,7 @@ import {
   UiFormFieldState,
   UiInput,
 } from '@inventory-ops-console/shared-ui/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ioc-login-page',
@@ -24,6 +25,7 @@ import {
 export class LoginPage {
   private readonly formBuilder = inject(NonNullableFormBuilder);
   private readonly authLoginService = inject(AuthLoginService);
+  private readonly router = inject(Router);
 
   protected readonly loginForm = createLoginForm(this.formBuilder);
   protected readonly isSubmitting = signal(false);
@@ -42,6 +44,7 @@ export class LoginPage {
 
     try {
       await this.authLoginService.signIn(email, password);
+      await this.router.navigateByUrl('/dashboard');
     } catch {
       this.submitError.set('Unable to sign in. Please check your credentials.');
     } finally {
