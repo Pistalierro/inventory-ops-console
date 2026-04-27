@@ -7,12 +7,12 @@ import {
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { createLoginForm } from '../login-form.factory';
 import { AuthLoginService } from '@inventory-ops-console/core-auth-data-access';
+import { UiButton } from '@inventory-ops-console/shared-ui/button';
 import {
-  UiButton,
   UiFormField,
   UiFormFieldState,
   UiInput,
-} from '@inventory-ops-console/shared-ui';
+} from '@inventory-ops-console/shared-ui/forms';
 
 @Component({
   selector: 'ioc-login-page',

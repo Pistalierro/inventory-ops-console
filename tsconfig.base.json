@@ -10,7 +10,10 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -27,9 +30,22 @@
       "@inventory-ops-console/shared-models": [
         "libs/shared/models/src/index.ts"
       ],
-      "@inventory-ops-console/shared-ui": ["libs/shared/ui/src/index.ts"],
-      "@inventory-ops-console/shared-util": ["libs/shared/util/src/index.ts"]
+      "@inventory-ops-console/shared-ui": [
+        "libs/shared/ui/src/index.ts"
+      ],
+      "@inventory-ops-console/shared-ui/button": [
+        "libs/shared/ui/src/button/index.ts"
+      ],
+      "@inventory-ops-console/shared-ui/forms": [
+        "libs/shared/ui/src/forms/index.ts"
+      ],
+      "@inventory-ops-console/shared-util": [
+        "libs/shared/util/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }
