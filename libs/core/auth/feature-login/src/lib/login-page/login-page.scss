@@ -1,0 +1,123 @@
+@use '../../../../../../shared/styles/src/mixins' as mixins;
+
+:host {
+  display: block;
+  min-height: 100dvh;
+}
+
+.login-page {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+  background: radial-gradient(circle at top, var(--color-primary-soft), transparent 38%),
+  var(--color-bg);
+
+  &__panel {
+    width: min(100%, 28rem);
+    padding: var(--space-8);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  &__panel-top {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  &__header {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  &__eyebrow {
+    color: var(--color-primary);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: var(--line-height-tight);
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-family: var(--font-family-heading);
+  }
+
+  &__subtitle {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+
+  &__meta {
+    display: grid;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--color-surface-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  &__meta-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  &__meta-label {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+
+  &__meta-value {
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-align: right;
+  }
+
+  &__footer {
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+    line-height: var(--line-height-relaxed);
+  }
+
+  @include mixins.sm-down {
+    padding: var(--space-4);
+
+    &__panel {
+      padding: var(--space-6);
+    }
+
+    &__meta-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-1);
+    }
+
+    &__meta-value {
+      text-align: left;
+    }
+  }
+}
+
+.login-form {
+  display: grid;
+  gap: var(--space-5);
+
+  &__error {
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid rgba(196, 69, 54, 0.24);
+    border-radius: var(--radius-md);
+    background: rgba(196, 69, 54, 0.08);
+    color: var(--color-danger);
+    font-size: var(--text-sm);
+  }
+
+  &__submit {
+    width: 100%;
+  }
+}

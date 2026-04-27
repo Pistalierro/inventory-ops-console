@@ -18,6 +18,9 @@
       "@inventory-ops-console/core-auth-data-access": [
         "libs/core/auth/data-access/src/index.ts"
       ],
+      "@inventory-ops-console/core-auth-feature-login": [
+        "libs/core/auth/feature-login/src/index.ts"
+      ],
       "@inventory-ops-console/core-user-data-access": [
         "libs/core/user/data-access/src/index.ts"
       ],

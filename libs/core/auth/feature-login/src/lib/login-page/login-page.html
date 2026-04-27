@@ -1,0 +1,99 @@
+<section class="login-page">
+  <div class="login-page__panel">
+    <div class="login-page__panel-top">
+      <header class="login-page__header">
+        <p class="login-page__eyebrow">Inventory Operations Console</p>
+        <h1 class="login-page__title">Sign in</h1>
+        <p class="login-page__subtitle">
+          Access the inventory workspace with your authorized account.
+        </p>
+      </header>
+
+      <div class="login-page__meta">
+        <div class="login-page__meta-item">
+          <span class="login-page__meta-label">Workspace</span>
+          <span class="login-page__meta-value">Operations Console</span>
+        </div>
+
+        <div class="login-page__meta-item">
+          <span class="login-page__meta-label">Access model</span>
+          <span class="login-page__meta-value">Role-based permissions</span>
+        </div>
+      </div>
+    </div>
+
+    <form
+      class="login-form"
+      [formGroup]="loginForm"
+      novalidate
+      (ngSubmit)="onSubmit()"
+    >
+      <ioc-ui-form-field
+        label="Email"
+        [required]="true"
+        [state]="emailFieldState"
+      >
+        <input
+          iocUiInput
+          [state]="emailFieldState"
+          formControlName="email"
+          type="email"
+          placeholder="you@company.com"
+          autocomplete="email"
+        />
+
+        @if (showEmailRequiredError) {
+          <span error>Enter your email address.</span>
+        }
+
+        @if (showEmailFormatError) {
+          <span error>Enter a valid email address.</span>
+        }
+      </ioc-ui-form-field>
+
+      <ioc-ui-form-field
+        label="Password"
+        [required]="true"
+        [state]="passwordFieldState"
+      >
+        <input
+          iocUiInput
+          [state]="passwordFieldState"
+          formControlName="password"
+          type="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+        />
+
+        @if (showPasswordRequiredError) {
+          <span error>Enter your password.</span>
+        }
+
+        @if (showPasswordMinLengthError) {
+          <span error>Password must contain at least 8 characters.</span>
+        }
+      </ioc-ui-form-field>
+
+      @if (submitError(); as errorMessage) {
+        <p class="login-form__error">{{ errorMessage }}</p>
+      }
+
+      <ioc-ui-button
+        class="login-form__submit"
+        type="submit"
+        size="lg"
+        [disabled]="isSubmitting()"
+      >
+        @if (isSubmitting()) {
+          Signing in...
+        } @else {
+          Sign in
+        }
+      </ioc-ui-button>
+    </form>
+
+    <p class="login-page__footer">
+      Authorized staff only. Activity may be monitored and audited.
+    </p>
+  </div>
+</section>
