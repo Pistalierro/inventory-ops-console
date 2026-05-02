@@ -5,15 +5,15 @@ import {
   signal,
 } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { createLoginForm } from '../login-form.factory';
-import { AuthLoginService } from '@inventory-ops-console/core-auth-data-access';
+import { AuthSessionService } from '@inventory-ops-console/core-auth-data-access';
 import { UiButton } from '@inventory-ops-console/shared-ui/button';
 import {
   UiFormField,
   UiFormFieldState,
   UiInput,
 } from '@inventory-ops-console/shared-ui/forms';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'ioc-login-page',
@@ -24,7 +24,7 @@ import { Router } from '@angular/router';
 })
 export class LoginPage {
   private readonly formBuilder = inject(NonNullableFormBuilder);
-  private readonly authLoginService = inject(AuthLoginService);
+  private readonly authSessionService = inject(AuthSessionService);
   private readonly router = inject(Router);
 
   protected readonly loginForm = createLoginForm(this.formBuilder);
@@ -43,7 +43,7 @@ export class LoginPage {
     const { email, password } = this.loginForm.getRawValue();
 
     try {
-      await this.authLoginService.signIn(email, password);
+      await this.authSessionService.signIn(email, password);
       await this.router.navigateByUrl('/dashboard');
     } catch {
       this.submitError.set('Unable to sign in. Please check your credentials.');

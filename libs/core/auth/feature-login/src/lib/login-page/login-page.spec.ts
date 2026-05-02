@@ -1,19 +1,19 @@
 jest.mock('@inventory-ops-console/core-auth-data-access', () => ({
-  AuthLoginService: class AuthLoginService {},
+  AuthSessionService: class AuthSessionService {},
 }));
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { AuthLoginService } from '@inventory-ops-console/core-auth-data-access';
+import { AuthSessionService } from '@inventory-ops-console/core-auth-data-access';
 import { LoginPage } from './login-page';
 
 describe('LoginPage', () => {
   let fixture: ComponentFixture<LoginPage>;
-  let authLoginService: { signIn: jest.Mock };
+  let authSessionService: { signIn: jest.Mock };
   let router: { navigateByUrl: jest.Mock };
 
   beforeEach(async () => {
-    authLoginService = {
+    authSessionService = {
       signIn: jest.fn(),
     };
 
@@ -24,7 +24,7 @@ describe('LoginPage', () => {
     await TestBed.configureTestingModule({
       imports: [LoginPage],
       providers: [
-        { provide: AuthLoginService, useValue: authLoginService },
+        { provide: AuthSessionService, useValue: authSessionService },
         { provide: Router, useValue: router },
       ],
     }).compileComponents();
@@ -36,19 +36,19 @@ describe('LoginPage', () => {
   it('should not sign in when form is invalid', async () => {
     await submitLoginForm();
 
-    expect(authLoginService.signIn).not.toHaveBeenCalled();
+    expect(authSessionService.signIn).not.toHaveBeenCalled();
     expect(router.navigateByUrl).not.toHaveBeenCalled();
   });
 
   it('should sign in and navigate to dashboard when form is valid', async () => {
-    authLoginService.signIn.mockResolvedValue({});
+    authSessionService.signIn.mockResolvedValue({});
 
     setInputValue('input[formControlName="email"]', 'user@company.com');
     setInputValue('input[formControlName="password"]', 'password123');
 
     await submitLoginForm();
 
-    expect(authLoginService.signIn).toHaveBeenCalledWith(
+    expect(authSessionService.signIn).toHaveBeenCalledWith(
       'user@company.com',
       'password123'
     );
@@ -56,7 +56,9 @@ describe('LoginPage', () => {
   });
 
   it('should show submit error when sign in fails', async () => {
-    authLoginService.signIn.mockRejectedValue(new Error('Invalid credentials'));
+    authSessionService.signIn.mockRejectedValue(
+      new Error('Invalid credentials')
+    );
 
     setInputValue('input[formControlName="email"]', 'user@company.com');
     setInputValue('input[formControlName="password"]', 'password123');
