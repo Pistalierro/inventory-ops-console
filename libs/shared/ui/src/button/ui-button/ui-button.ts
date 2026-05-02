@@ -24,12 +24,17 @@ export class UiButton {
   readonly size = input<UiButtonSize>('md');
   readonly type = input<UiButtonType>('button');
   readonly disabled = input(false);
+  readonly iconOnly = input(false);
+  readonly ariaLabel = input<string | null>(null);
 
   protected readonly hostClasses = computed(() => {
     return [
       'ui-button',
       `ui-button--${this.variant()}`,
       `ui-button--${this.size()}`,
-    ].join(' ');
+      this.iconOnly() ? 'ui-button--icon-only' : null,
+    ]
+      .filter(Boolean)
+      .join(' ');
   });
 }
