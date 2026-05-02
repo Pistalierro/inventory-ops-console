@@ -1,0 +1,21 @@
+{
+  "name": "core-shell-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/core/shell/data-access/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["scope:core", "type:data-access"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/core/shell/data-access/jest.config.ts",
+        "tsConfig": "libs/core/shell/data-access/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

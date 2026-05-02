@@ -24,6 +24,9 @@
       "@inventory-ops-console/core-auth-feature-login": [
         "libs/core/auth/feature-login/src/index.ts"
       ],
+      "@inventory-ops-console/core-shell-data-access": [
+        "libs/core/shell/data-access/src/index.ts"
+      ],
       "@inventory-ops-console/core-shell-feature-shell": [
         "libs/core/shell/feature-shell/src/index.ts"
       ],
