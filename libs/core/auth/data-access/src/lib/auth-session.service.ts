@@ -1,4 +1,9 @@
-import { inject, Injectable } from '@angular/core';
+import {
+  EnvironmentInjector,
+  inject,
+  Injectable,
+  runInInjectionContext,
+} from '@angular/core';
 import type { UserCredential } from '@angular/fire/auth';
 import {
   Auth,
@@ -12,16 +17,21 @@ import {
 })
 export class AuthSessionService {
   private readonly auth = inject(Auth);
+  private readonly injector = inject(EnvironmentInjector);
 
   signIn(email: string, password: string): Promise<UserCredential> {
-    return signInWithEmailAndPassword(this.auth, email, password);
+    return runInInjectionContext(this.injector, () =>
+      signInWithEmailAndPassword(this.auth, email, password)
+    );
   }
 
   signOut(): Promise<void> {
-    return signOut(this.auth);
+    return runInInjectionContext(this.injector, () => signOut(this.auth));
   }
 
   sendPasswordReset(email: string): Promise<void> {
-    return sendPasswordResetEmail(this.auth, email);
+    return runInInjectionContext(this.injector, () =>
+      sendPasswordResetEmail(this.auth, email)
+    );
   }
 }

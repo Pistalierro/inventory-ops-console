@@ -3,6 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Auth, authState } from '@angular/fire/auth';
 import { map, shareReplay } from 'rxjs';
 import { mapFirebaseAuthUser } from './auth-user.mapper';
+import { AuthUser } from './auth-user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,4 +17,10 @@ export class AuthStateService {
   );
 
   readonly authUser = toSignal(this.authUser$, { initialValue: null });
+
+  currentAuthUser(): AuthUser | null {
+    const user = this.auth.currentUser;
+    
+    return user ? mapFirebaseAuthUser(user) : null;
+  }
 }

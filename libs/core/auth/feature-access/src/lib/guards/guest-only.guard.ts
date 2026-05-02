@@ -7,6 +7,10 @@ export const guestOnlyGuard: CanActivateFn = () => {
   const authStateService = inject(AuthStateService);
   const router = inject(Router);
 
+  if (authStateService.currentAuthUser()) {
+    return router.createUrlTree(['/dashboard']);
+  }
+
   return authStateService.authUser$.pipe(
     take(1),
     map((user) => (user ? router.createUrlTree(['/dashboard']) : true))

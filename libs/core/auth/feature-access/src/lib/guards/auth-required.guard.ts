@@ -7,6 +7,10 @@ export const authRequiredGuard: CanActivateFn = () => {
   const authStateService = inject(AuthStateService);
   const router = inject(Router);
 
+  if (authStateService.currentAuthUser()) {
+    return true;
+  }
+
   return authStateService.authUser$.pipe(
     take(1),
     map((user) => (user ? true : router.createUrlTree(['/login'])))
