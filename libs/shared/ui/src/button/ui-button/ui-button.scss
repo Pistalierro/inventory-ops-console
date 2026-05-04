@@ -79,6 +79,28 @@
   }
 }
 
+:host(.ui-button--link) {
+  .ui-button__control {
+    width: auto;
+    min-height: auto;
+    padding-inline: 0;
+    border-color: transparent;
+    background: transparent;
+    color: var(--color-primary);
+    font-weight: 600;
+
+    &:hover:not(:disabled) {
+      background: transparent;
+      border-color: transparent;
+      color: var(--color-primary-strong);
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 3px var(--color-focus-ring);
+    }
+  }
+}
+
 :host(.ui-button--lg) {
   .ui-button__control {
     min-height: 3rem;
@@ -100,6 +122,15 @@
     min-height: 2.25rem;
     padding-inline: var(--space-4);
     font-size: var(--text-sm);
+  }
+}
+
+:host(.ui-button--link.ui-button--lg),
+:host(.ui-button--link.ui-button--md),
+:host(.ui-button--link.ui-button--sm) {
+  .ui-button__control {
+    min-height: auto;
+    padding-inline: 0;
   }
 }
 

@@ -5,7 +5,7 @@ import {
   input,
 } from '@angular/core';
 
-export type UiButtonVariant = 'primary' | 'secondary' | 'ghost';
+export type UiButtonVariant = 'primary' | 'secondary' | 'ghost' | 'link';
 export type UiButtonSize = 'lg' | 'md' | 'sm';
 export type UiButtonType = 'button' | 'submit' | 'reset';
 
