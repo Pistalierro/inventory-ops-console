@@ -4,13 +4,17 @@ import {
   Injectable,
   runInInjectionContext,
 } from '@angular/core';
-import type { UserCredential } from '@angular/fire/auth';
+import { Auth } from '@angular/fire/auth';
 import {
-  Auth,
+  browserLocalPersistence,
+  browserSessionPersistence,
+  createUserWithEmailAndPassword,
   sendPasswordResetEmail,
+  setPersistence,
   signInWithEmailAndPassword,
   signOut,
-} from '@angular/fire/auth';
+} from 'firebase/auth';
+import type { UserCredential } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -19,9 +23,24 @@ export class AuthSessionService {
   private readonly auth = inject(Auth);
   private readonly injector = inject(EnvironmentInjector);
 
-  signIn(email: string, password: string): Promise<UserCredential> {
+  signIn(
+    email: string,
+    password: string,
+    rememberMe: boolean
+  ): Promise<UserCredential> {
+    return runInInjectionContext(this.injector, async () => {
+      await setPersistence(
+        this.auth,
+        rememberMe ? browserLocalPersistence : browserSessionPersistence
+      );
+
+      return signInWithEmailAndPassword(this.auth, email, password);
+    });
+  }
+
+  signUp(email: string, password: string): Promise<UserCredential> {
     return runInInjectionContext(this.injector, () =>
-      signInWithEmailAndPassword(this.auth, email, password)
+      createUserWithEmailAndPassword(this.auth, email, password)
     );
   }
 

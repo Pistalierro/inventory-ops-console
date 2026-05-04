@@ -10,23 +10,22 @@
   display: grid;
   place-items: center;
   padding: var(--space-6);
-  background: radial-gradient(circle at top, var(--color-primary-soft), transparent 38%),
+  background: radial-gradient(
+      circle at top,
+      var(--color-primary-soft),
+      transparent 38%
+  ),
   var(--color-bg);
 
   &__panel {
     width: min(100%, 28rem);
     padding: var(--space-8);
+    display: grid;
+    gap: var(--space-7);
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
-    display: grid;
-    gap: var(--space-8);
-  }
-
-  &__panel-top {
-    display: grid;
-    gap: var(--space-6);
   }
 
   &__header {
@@ -51,38 +50,21 @@
     font-size: var(--text-sm);
   }
 
-  &__meta {
-    display: grid;
-    gap: var(--space-3);
-    padding: var(--space-4);
-    background: var(--color-surface-muted);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-  }
-
-  &__meta-item {
+  &__switch {
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--space-4);
-  }
-
-  &__meta-label {
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
     color: var(--color-text-muted);
     font-size: var(--text-sm);
-  }
-
-  &__meta-value {
-    color: var(--color-text);
-    font-size: var(--text-sm);
-    font-weight: 600;
-    text-align: right;
+    margin-top: var(--space-2);
   }
 
   &__footer {
     color: var(--color-text-muted);
     font-size: var(--text-xs);
     line-height: var(--line-height-relaxed);
+    text-align: center;
   }
 
   @include mixins.sm-down {
@@ -90,16 +72,13 @@
 
     &__panel {
       padding: var(--space-6);
+      gap: var(--space-6);
     }
 
-    &__meta-item {
+    &__switch {
       flex-direction: column;
-      align-items: flex-start;
       gap: var(--space-1);
-    }
-
-    &__meta-value {
-      text-align: left;
+      text-align: center;
     }
   }
 }
@@ -107,6 +86,44 @@
 .login-form {
   display: grid;
   gap: var(--space-5);
+
+  &__options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  &__remember {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    cursor: pointer;
+
+    input {
+      width: 1rem;
+      height: 1rem;
+      margin: 0;
+      accent-color: var(--color-primary);
+      cursor: pointer;
+    }
+
+    span {
+      line-height: var(--line-height-tight);
+    }
+  }
+
+  &__note {
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-muted);
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+    line-height: var(--line-height-relaxed);
+  }
 
   &__error {
     padding: var(--space-3) var(--space-4);
@@ -117,7 +134,24 @@
     font-size: var(--text-sm);
   }
 
+  &__success {
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid rgba(47, 158, 68, 0.24);
+    border-radius: var(--radius-md);
+    background: rgba(47, 158, 68, 0.08);
+    color: var(--color-success);
+    font-size: var(--text-sm);
+  }
+
   &__submit {
     width: 100%;
+  }
+
+  @include mixins.sm-down {
+    &__options {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
   }
 }

@@ -30,6 +30,27 @@ service cloud.firestore {
       return hasProfile() && profile().data.role == 'viewer';
     }
 
+    function isValidSelfProfileCreate(userId) {
+      return isSignedIn()
+        && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly([
+          'email',
+          'displayName',
+          'role'
+        ])
+        && request.resource.data.keys().hasAll([
+          'email',
+          'displayName',
+          'role'
+        ])
+        && request.resource.data.email is string
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() > 0
+        && request.resource.data.displayName.size() <= 120
+        && request.resource.data.role == 'viewer';
+    }
+
     function canReadAppData() {
       return isAdmin() || isManager() || isViewer();
     }
@@ -130,10 +151,11 @@ service cloud.firestore {
     match /profiles/{userId} {
       allow read: if isSignedIn() && (request.auth.uid == userId || isAdmin());
 
-      // Intentionally locked down for MVP.
+      allow create: if isValidSelfProfileCreate(userId);
+
       // Role assignment and profile management should happen
       // through trusted admin flows / server-side tools later.
-      allow create, update, delete: if false;
+      allow update, delete: if false;
     }
 
     match /products/{productId} {

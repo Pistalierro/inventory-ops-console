@@ -1,52 +1,75 @@
 <section class="login-page">
   <div class="login-page__panel">
-    <div class="login-page__panel-top">
-      <header class="login-page__header">
-        <p class="login-page__eyebrow">Inventory Operations Console</p>
-        <h1 class="login-page__title">Sign in</h1>
-        <p class="login-page__subtitle">
+    <header class="login-page__header">
+      <p class="login-page__eyebrow">Inventory Operations Console</p>
+
+      <h1 class="login-page__title">
+        @if (state.isRegisterMode()) {
+          Create account
+        } @else {
+          Sign in
+        }
+      </h1>
+
+      <p class="login-page__subtitle">
+        @if (state.isRegisterMode()) {
+          Register your account to request access to the operations workspace.
+        } @else {
           Access the inventory workspace with your authorized account.
-        </p>
-      </header>
-
-      <div class="login-page__meta">
-        <div class="login-page__meta-item">
-          <span class="login-page__meta-label">Workspace</span>
-          <span class="login-page__meta-value">Operations Console</span>
-        </div>
-
-        <div class="login-page__meta-item">
-          <span class="login-page__meta-label">Access model</span>
-          <span class="login-page__meta-value">Role-based permissions</span>
-        </div>
-      </div>
-    </div>
+        }
+      </p>
+    </header>
 
     <form
       class="login-form"
-      [formGroup]="loginForm"
+      [formGroup]="state.form"
       novalidate
-      (ngSubmit)="onSubmit()"
+      (ngSubmit)="state.submit()"
     >
+      @if (state.isRegisterMode()) {
+        <ioc-ui-form-field
+          label="Full name"
+          [required]="true"
+          [state]="state.displayNameFieldState"
+        >
+          <input
+            iocUiInput
+            [state]="state.displayNameFieldState"
+            formControlName="displayName"
+            type="text"
+            placeholder="Anatolij Sysoenko"
+            autocomplete="name"
+          />
+
+          @if (state.showDisplayNameRequiredError) {
+            <span error>Enter your full name.</span>
+          }
+
+          @if (state.showDisplayNameMaxLengthError) {
+            <span error>Full name must be 120 characters or less.</span>
+          }
+        </ioc-ui-form-field>
+      }
+
       <ioc-ui-form-field
         label="Email"
         [required]="true"
-        [state]="emailFieldState"
+        [state]="state.emailFieldState"
       >
         <input
           iocUiInput
-          [state]="emailFieldState"
+          [state]="state.emailFieldState"
           formControlName="email"
           type="email"
           placeholder="you@company.com"
           autocomplete="email"
         />
 
-        @if (showEmailRequiredError) {
+        @if (state.showEmailRequiredError) {
           <span error>Enter your email address.</span>
         }
 
-        @if (showEmailFormatError) {
+        @if (state.showEmailFormatError) {
           <span error>Enter a valid email address.</span>
         }
       </ioc-ui-form-field>
@@ -54,43 +77,100 @@
       <ioc-ui-form-field
         label="Password"
         [required]="true"
-        [state]="passwordFieldState"
+        [state]="state.passwordFieldState"
       >
         <input
           iocUiInput
-          [state]="passwordFieldState"
+          [state]="state.passwordFieldState"
           formControlName="password"
           type="password"
           placeholder="Enter your password"
           autocomplete="current-password"
         />
 
-        @if (showPasswordRequiredError) {
+        @if (state.showPasswordRequiredError) {
           <span error>Enter your password.</span>
         }
 
-        @if (showPasswordMinLengthError) {
+        @if (state.showPasswordMinLengthError) {
           <span error>Password must contain at least 8 characters.</span>
         }
       </ioc-ui-form-field>
 
-      @if (submitError(); as errorMessage) {
+      @if (!state.isRegisterMode()) {
+        <div class="login-form__options">
+          <label class="login-form__remember">
+            <input type="checkbox" formControlName="rememberMe" />
+            <span>Remember me</span>
+          </label>
+
+          <ioc-ui-button
+            variant="link"
+            size="sm"
+            type="button"
+            [disabled]="state.isSubmitting()"
+            (click)="state.sendPasswordReset()"
+          >
+            Forgot password?
+          </ioc-ui-button>
+        </div>
+      }
+
+      @if (state.isRegisterMode()) {
+        <p class="login-form__note">
+          New accounts start with viewer access. An administrator can update
+          permissions after registration.
+        </p>
+      }
+
+      @if (state.submitError(); as errorMessage) {
         <p class="login-form__error">{{ errorMessage }}</p>
+      }
+
+      @if (state.submitSuccess(); as successMessage) {
+        <p class="login-form__success">{{ successMessage }}</p>
       }
 
       <ioc-ui-button
         class="login-form__submit"
         type="submit"
         size="lg"
-        [disabled]="isSubmitting()"
+        [disabled]="state.isSubmitting()"
       >
-        @if (isSubmitting()) {
-          Signing in...
+        @if (state.isSubmitting()) {
+          {{ state.submittingLabel() }}
         } @else {
-          Sign in
+          {{ state.submitLabel() }}
         }
       </ioc-ui-button>
     </form>
+
+    <div class="login-page__switch">
+      @if (state.isRegisterMode()) {
+        <span>Already have an account?</span>
+
+        <ioc-ui-button
+          variant="link"
+          size="sm"
+          type="button"
+          (click)="state.switchMode('signIn')"
+        >
+          Sign in
+        </ioc-ui-button>
+
+      } @else {
+        <span>Need an account?</span>
+
+        <ioc-ui-button
+          variant="link"
+          size="sm"
+          type="button"
+          (click)="state.switchMode('register')"
+        >
+          Create account
+        </ioc-ui-button>
+      }
+    </div>
 
     <p class="login-page__footer">
       Authorized staff only. Activity may be monitored and audited.
