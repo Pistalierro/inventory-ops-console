@@ -144,33 +144,62 @@
   }
 
   @include mixins.md-down {
-    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    min-height: auto;
+    grid-template-columns: auto auto minmax(0, 1fr) auto;
     grid-template-areas:
       'menu brand user actions'
       'search search search search';
     gap: var(--space-3);
-    padding-block: var(--space-3);
+    padding: var(--space-3) var(--space-4);
 
     &__menu {
       display: inline-flex;
       grid-area: menu;
     }
 
+    &__brand {
+      gap: var(--space-2);
+    }
+
+    &__brand-copy {
+      gap: 0;
+    }
+
+    &__eyebrow {
+      display: none;
+    }
+
+    &__title {
+      font-size: var(--text-md);
+    }
+
     &__search {
       width: 100%;
+    }
+
+    &__search-input {
+      min-height: 2.5rem;
+      padding-block: var(--space-2);
     }
   }
 
   @include mixins.sm-down {
-    &__brand-copy {
-      display: none;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'menu brand actions'
+      'search search search';
+
+    &__brand {
+      min-width: 0;
+    }
+
+    &__title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     &__user {
-      gap: var(--space-2);
-    }
-
-    &__role {
       display: none;
     }
   }
