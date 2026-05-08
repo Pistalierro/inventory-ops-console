@@ -1,8 +1,51 @@
 <div class="shell-layout">
-  <ioc-shell-topbar />
+  <ioc-shell-topbar (menuClick)="toggleSidebar()" />
 
   <div class="shell-layout__body">
-    <ioc-shell-sidebar />
+    <ioc-shell-sidebar class="shell-layout__sidebar" />
+
+    <button
+      class="shell-layout__backdrop"
+      [class.shell-layout__backdrop--open]="isSidebarOpen()"
+      type="button"
+      aria-label="Close navigation"
+      [attr.aria-hidden]="isSidebarOpen() ? null : 'true'"
+      [attr.tabindex]="isSidebarOpen() ? null : '-1'"
+      (click)="closeSidebar()"
+    ></button>
+
+    <div
+      class="shell-layout__drawer"
+      [class.shell-layout__drawer--open]="isSidebarOpen()"
+      role="dialog"
+      aria-label="Navigation"
+      [attr.aria-hidden]="isSidebarOpen() ? null : 'true'"
+      [attr.inert]="isSidebarOpen() ? null : ''"
+    >
+      <div class="shell-layout__drawer-header">
+        <span class="shell-layout__drawer-title">Navigation</span>
+
+        <ioc-ui-button
+          variant="ghost"
+          size="sm"
+          type="button"
+          [iconOnly]="true"
+          ariaLabel="Close navigation"
+          (click)="closeSidebar()"
+        >
+          <svg
+            class="shell-layout__drawer-close-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </ioc-ui-button>
+      </div>
+
+      <ioc-shell-sidebar />
+    </div>
 
     <main class="shell-layout__content">
       <router-outlet></router-outlet>

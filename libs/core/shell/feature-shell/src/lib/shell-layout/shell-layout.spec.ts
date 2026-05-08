@@ -56,4 +56,54 @@ describe('ShellLayout', () => {
 
     expect(routerOutlet).toBeTruthy();
   });
+
+  it('should toggle mobile navigation drawer from topbar and drawer controls', () => {
+    const menuButton = fixture.nativeElement.querySelector(
+      'button[aria-label="Open navigation"]'
+    ) as HTMLButtonElement;
+    const drawer = fixture.nativeElement.querySelector(
+      '.shell-layout__drawer'
+    ) as HTMLElement;
+
+    expect(drawer.classList.contains('shell-layout__drawer--open')).toBe(
+      false
+    );
+
+    menuButton.click();
+    fixture.detectChanges();
+
+    expect(drawer.classList.contains('shell-layout__drawer--open')).toBe(true);
+
+    const closeButton = fixture.nativeElement.querySelector(
+      '.shell-layout__drawer button[aria-label="Close navigation"]'
+    ) as HTMLButtonElement;
+
+    closeButton.click();
+    fixture.detectChanges();
+
+    expect(drawer.classList.contains('shell-layout__drawer--open')).toBe(
+      false
+    );
+  });
+
+  it('should blur focused drawer control before hiding drawer from assistive technologies', () => {
+    const menuButton = fixture.nativeElement.querySelector(
+      'button[aria-label="Open navigation"]'
+    ) as HTMLButtonElement;
+
+    menuButton.click();
+    fixture.detectChanges();
+
+    const closeButton = fixture.nativeElement.querySelector(
+      '.shell-layout__drawer button[aria-label="Close navigation"]'
+    ) as HTMLButtonElement;
+
+    closeButton.focus();
+    expect(document.activeElement).toBe(closeButton);
+
+    closeButton.click();
+    fixture.detectChanges();
+
+    expect(document.activeElement).not.toBe(closeButton);
+  });
 });

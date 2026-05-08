@@ -1,4 +1,24 @@
 <header class="shell-topbar">
+  <ioc-ui-button
+    class="shell-topbar__menu"
+    variant="ghost"
+    size="sm"
+    type="button"
+    [iconOnly]="true"
+    ariaLabel="Open navigation"
+    (click)="menuClick.emit()"
+  >
+    <svg
+      class="shell-topbar__action-icon"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path d="M4 6h16" />
+      <path d="M4 12h16" />
+      <path d="M4 18h16" />
+    </svg>
+  </ioc-ui-button>
+
   <a class="shell-topbar__brand" routerLink="/dashboard" aria-label="Dashboard">
     <span class="shell-topbar__logo" aria-hidden="true">IO</span>
 

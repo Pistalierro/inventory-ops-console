@@ -15,6 +15,10 @@
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
 
+  &__menu {
+    display: none;
+  }
+
   &__brand {
     grid-area: brand;
     min-width: 0;
@@ -140,12 +144,17 @@
   }
 
   @include mixins.md-down {
-    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
     grid-template-areas:
-      'brand user actions'
-      'search search search';
+      'menu brand user actions'
+      'search search search search';
     gap: var(--space-3);
     padding-block: var(--space-3);
+
+    &__menu {
+      display: inline-flex;
+      grid-area: menu;
+    }
 
     &__search {
       width: 100%;

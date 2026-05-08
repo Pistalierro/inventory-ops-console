@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  output,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ShellStateService } from '@inventory-ops-console/core-shell-data-access';
 import { UiButton } from '@inventory-ops-console/shared-ui/button';
@@ -14,4 +19,5 @@ import { UiBadge } from '@inventory-ops-console/shared-ui/badge';
 })
 export class ShellTopbar {
   protected readonly shellState = inject(ShellStateService);
+  readonly menuClick = output<void>();
 }
