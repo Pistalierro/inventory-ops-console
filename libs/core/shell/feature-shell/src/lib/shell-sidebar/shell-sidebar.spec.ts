@@ -30,9 +30,7 @@ describe('ShellSidebar', () => {
   });
 
   it('should render upcoming navigation badges', () => {
-    const badges = fixture.nativeElement.querySelectorAll(
-      '.shell-sidebar__nav-badge'
-    );
+    const badges = fixture.nativeElement.querySelectorAll('ioc-ui-badge');
 
     expect(badges.length).toBeGreaterThan(0);
     expect(badges[0].textContent).toContain('Soon');

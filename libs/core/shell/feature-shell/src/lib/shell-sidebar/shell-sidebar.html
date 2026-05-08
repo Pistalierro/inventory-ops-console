@@ -1,41 +1,38 @@
 <aside class="shell-sidebar" aria-label="Primary navigation">
   <nav class="shell-sidebar__nav">
-    <span class="shell-sidebar__nav-section">Operations</span>
+    @for (section of sections; track section.label) {
+      <span class="shell-sidebar__nav-section">
+        {{ section.label }}
+      </span>
 
-    <a
-      class="shell-sidebar__nav-link"
-      routerLink="/dashboard"
-      routerLinkActive="shell-sidebar__nav-link--active"
-      [routerLinkActiveOptions]="{ exact: true }"
-    >
-      Dashboard
-    </a>
+      @for (item of section.items; track item.label) {
+        @if (item.route && !item.disabled) {
+          <a
+            class="shell-sidebar__nav-link"
+            [routerLink]="item.route"
+            routerLinkActive="shell-sidebar__nav-link--active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <span>{{ item.label }}</span>
 
-    <a class="shell-sidebar__nav-link shell-sidebar__nav-link--disabled">
-      <span>Products</span>
-      <span class="shell-sidebar__nav-badge">Soon</span>
-    </a>
+            @if (item.badge) {
+              <ioc-ui-badge variant="neutral" size="sm">
+                {{ item.badge }}
+              </ioc-ui-badge>
+            }
+          </a>
+        } @else {
+          <span class="shell-sidebar__nav-link shell-sidebar__nav-link--disabled">
+            <span>{{ item.label }}</span>
 
-    <a class="shell-sidebar__nav-link shell-sidebar__nav-link--disabled">
-      <span>Stock movements</span>
-      <span class="shell-sidebar__nav-badge">Soon</span>
-    </a>
-
-    <a class="shell-sidebar__nav-link shell-sidebar__nav-link--disabled">
-      <span>Locations</span>
-      <span class="shell-sidebar__nav-badge">Soon</span>
-    </a>
-
-    <span class="shell-sidebar__nav-section">Admin</span>
-
-    <a class="shell-sidebar__nav-link shell-sidebar__nav-link--disabled">
-      <span>Users</span>
-      <span class="shell-sidebar__nav-badge">Soon</span>
-    </a>
-
-    <a class="shell-sidebar__nav-link shell-sidebar__nav-link--disabled">
-      <span>Settings</span>
-      <span class="shell-sidebar__nav-badge">Soon</span>
-    </a>
+            @if (item.badge) {
+              <ioc-ui-badge variant="neutral" size="sm">
+                {{ item.badge }}
+              </ioc-ui-badge>
+            }
+          </span>
+        }
+      }
+    }
   </nav>
 </aside>
