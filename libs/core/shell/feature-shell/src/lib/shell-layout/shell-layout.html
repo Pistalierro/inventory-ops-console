@@ -1,3 +1,11 @@
-<main class="shell-layout">
-  <router-outlet></router-outlet>
-</main>
+<div class="shell-layout">
+  <ioc-shell-topbar />
+
+  <div class="shell-layout__body">
+    <ioc-shell-sidebar />
+
+    <main class="shell-layout__content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

@@ -5,5 +5,18 @@
 
 .shell-layout {
   min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr;
   background: var(--color-bg);
+
+  &__body {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 16rem minmax(0, 1fr);
+  }
+
+  &__content {
+    min-width: 0;
+    min-height: 0;
+  }
 }

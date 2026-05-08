@@ -4,13 +4,13 @@ jest.mock('@inventory-ops-console/core-shell-data-access', () => ({
 
 import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter, RouterOutlet } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { ShellStateService } from '@inventory-ops-console/core-shell-data-access';
-import { ShellLayout } from './shell-layout';
+import { ShellTopbar } from './shell-topbar';
 
-describe('ShellLayout', () => {
-  let component: ShellLayout;
-  let fixture: ComponentFixture<ShellLayout>;
+describe('ShellTopbar', () => {
+  let component: ShellTopbar;
+  let fixture: ComponentFixture<ShellTopbar>;
   let shellState: {
     isSigningOut: ReturnType<typeof signal<boolean>>;
     theme: ReturnType<typeof signal<'light' | 'dark'>>;
@@ -33,14 +33,14 @@ describe('ShellLayout', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [ShellLayout],
+      imports: [ShellTopbar],
       providers: [
         provideRouter([]),
         { provide: ShellStateService, useValue: shellState },
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ShellLayout);
+    fixture = TestBed.createComponent(ShellTopbar);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -49,11 +49,29 @@ describe('ShellLayout', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render router outlet for child routes', () => {
-    const routerOutlet = fixture.debugElement.query((debugElement) =>
-      debugElement.providerTokens.includes(RouterOutlet)
-    );
+  it('should trigger theme toggle from topbar action', () => {
+    const themeButton = fixture.nativeElement.querySelector(
+      'button[aria-label="Use dark theme"]'
+    ) as HTMLButtonElement;
 
-    expect(routerOutlet).toBeTruthy();
+    themeButton.click();
+
+    expect(shellState.toggleTheme).toHaveBeenCalled();
+  });
+
+  it('should render current user summary', () => {
+    expect(fixture.nativeElement.textContent).toContain('Pistaleiro');
+    expect(fixture.nativeElement.textContent).toContain('pistaleiro@gmail.com');
+    expect(fixture.nativeElement.textContent).toContain('Admin');
+  });
+
+  it('should trigger sign out from topbar action', () => {
+    const signOutButton = fixture.nativeElement.querySelector(
+      'button[aria-label="Sign out"]'
+    ) as HTMLButtonElement;
+
+    signOutButton.click();
+
+    expect(shellState.signOut).toHaveBeenCalled();
   });
 });

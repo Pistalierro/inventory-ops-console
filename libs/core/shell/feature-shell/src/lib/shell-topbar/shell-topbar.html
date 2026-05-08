@@ -1,0 +1,95 @@
+<header class="shell-topbar">
+  <a class="shell-topbar__brand" routerLink="/dashboard" aria-label="Dashboard">
+    <span class="shell-topbar__logo" aria-hidden="true">IO</span>
+
+    <span class="shell-topbar__brand-copy">
+      <span class="shell-topbar__eyebrow">Inventory Ops</span>
+      <strong class="shell-topbar__title">Console</strong>
+    </span>
+  </a>
+
+  <div class="shell-topbar__search">
+    <input
+      iocUiInput
+      class="shell-topbar__search-input"
+      type="search"
+      placeholder="Search inventory, orders, locations..."
+      aria-label="Search inventory"
+    />
+  </div>
+
+  <div class="shell-topbar__user" aria-label="Current user">
+    <span class="shell-topbar__user-copy">
+      <strong class="shell-topbar__user-name">
+        {{ shellState.displayName() }}
+      </strong>
+
+      @if (shellState.email()) {
+        <span class="shell-topbar__user-email">
+          {{ shellState.email() }}
+        </span>
+      }
+    </span>
+
+    <span class="shell-topbar__role">
+      {{ shellState.roleLabel() }}
+    </span>
+  </div>
+
+  <div class="shell-topbar__actions">
+    <ioc-ui-button
+      variant="ghost"
+      size="sm"
+      type="button"
+      [iconOnly]="true"
+      [ariaLabel]="shellState.theme() === 'dark' ? 'Use light theme' : 'Use dark theme'"
+      (click)="shellState.toggleTheme()"
+    >
+      @if (shellState.theme() === 'dark') {
+        <svg
+          class="shell-topbar__action-icon shell-topbar__action-icon--sun"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2" />
+          <path d="M12 20v2" />
+          <path d="m4.93 4.93 1.41 1.41" />
+          <path d="m17.66 17.66 1.41 1.41" />
+          <path d="M2 12h2" />
+          <path d="M20 12h2" />
+          <path d="m6.34 17.66-1.41 1.41" />
+          <path d="m19.07 4.93-1.41 1.41" />
+        </svg>
+      } @else {
+        <svg
+          class="shell-topbar__action-icon shell-topbar__action-icon--moon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z" />
+        </svg>
+      }
+    </ioc-ui-button>
+
+    <ioc-ui-button
+      variant="ghost"
+      size="sm"
+      type="button"
+      [iconOnly]="true"
+      ariaLabel="Sign out"
+      [disabled]="shellState.isSigningOut()"
+      (click)="shellState.signOut()"
+    >
+      <svg
+        class="shell-topbar__action-icon"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+        <path d="M16 17l5-5-5-5" />
+        <path d="M21 12H9" />
+      </svg>
+    </ioc-ui-button>
+  </div>
+</header>
